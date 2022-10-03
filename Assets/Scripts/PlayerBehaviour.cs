@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     public float speed = 3.0f;
+    public int score = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,5 +19,13 @@ public class PlayerBehaviour : MonoBehaviour
         float y = Input.GetAxisRaw("Vertical") * Time.deltaTime * speed;
 
         transform.position = new Vector2(transform.position.x + x, transform.position.y + y);
+    }
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("drops"))
+        {
+            Destroy(other.gameObject);
+            score++;
+        }
     }
 }
